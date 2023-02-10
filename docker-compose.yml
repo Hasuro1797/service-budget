@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:8.0.32-debian
+    container_name: database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "my-weak-password"
+      MYSQL_DATABASE: budget_app
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - /var/lib/mysql
+    ports:
+      - 3306:3306
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - /var/lib/adminer
+    depends_on:
+      - db
